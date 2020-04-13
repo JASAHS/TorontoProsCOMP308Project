@@ -7,16 +7,20 @@ import Button from 'react-bootstrap/Button';
 import { withRouter } from 'react-router-dom';
 
 function CreateUser(props) {
-  const [user, setUser] = useState({ _id: '', firstName: '', lastName: '', 
-                email: '',username: '',password: '' });
+  const [user, setUser] = useState({
+    _id: '', firstName: '', lastName: '',
+    email: '', username: '', password: '', type: ''
+  });
   const [showLoading, setShowLoading] = useState(false);
   const apiUrl = "http://localhost:3000/";
 
   const saveUser = (e) => {
     setShowLoading(true);
     e.preventDefault();
-    const data = { firstName: user.firstName, lastName: user.lastName, 
-      email: user.email,username: user.username, password: user.password };
+    const data = {
+      firstName: user.firstName, lastName: user.lastName,
+      email: user.email, type: user.type, username: user.username, password: user.password
+    };
     axios.post(apiUrl, data)
       .then((result) => {
         setShowLoading(false);
@@ -26,16 +30,16 @@ function CreateUser(props) {
 
   const onChange = (e) => {
     e.persist();
-    setUser({...user, [e.target.name]: e.target.value});
+    setUser({ ...user, [e.target.name]: e.target.value });
   }
 
   return (
     <div>
-      {showLoading && 
+      {showLoading &&
         <Spinner animation="border" role="status">
           <span className="sr-only">Loading...</span>
-        </Spinner> 
-      } 
+        </Spinner>
+      }
       <Jumbotron>
         <Form onSubmit={saveUser}>
           <Form.Group>
@@ -45,6 +49,22 @@ function CreateUser(props) {
           <Form.Group>
             <Form.Label> Last Name</Form.Label>
             <Form.Control type="text" name="lastName" id="lastName" placeholder="Enter last name" value={user.lastName} onChange={onChange} />
+          </Form.Group>
+          <Form.Group>
+            <Form.Label> User Type</Form.Label>
+            <select
+              required
+              type="text"
+              className="form-control"
+              onChange={onChange}
+              value={user.type}
+              placeholder="Enter your UserType"
+              id="type"
+            >
+              <option value="">Select User Type</option>
+              <option value="teacher">Nurse</option>
+              <option value="guardian">Patient</option>
+            </select>
           </Form.Group>
           <Form.Group>
             <Form.Label>Email</Form.Label>
@@ -58,7 +78,7 @@ function CreateUser(props) {
             <Form.Label>Password</Form.Label>
             <Form.Control type="text" name="password" id="password" placeholder="Enter password" value={user.password} onChange={onChange} />
           </Form.Group>
-          
+
           <Button variant="primary" type="submit">
             Save
           </Button>
