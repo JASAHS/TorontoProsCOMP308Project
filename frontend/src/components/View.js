@@ -6,11 +6,13 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import List from './List';
+import NurseHome from './NurseHome';
 import PatientsList from './PatientsList';
 import { Link, withRouter, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import CreateUser from './CreateUser';
 //
 
 //
@@ -61,12 +63,20 @@ function View(props) {
   return (
     <div>
       {
+        type == "nurse" &&
+        <div>< NurseHome /></div>
+      }
+      {
+        type == "patient" &&
+        <div><List /></div>
+      }
+      {/* {
         type == "nurse" ? <div>
           <Button variant="primary" type="submit" onClick={changeView}>
             Show Patients List
 </Button><br /><br /><br />
-        </div> : <PatientsList />
-      }
+        </div> : < List />
+      } */}
       {/* {status == false
         ? <div>
           <Button variant="primary" type="submit" onClick={changeView}>
@@ -78,18 +88,6 @@ function View(props) {
         Log Out
   </Button>
     </div>
-    // <div className="App">
-    //   {article !== 'y'
-    //     ? <div>
-    //         <p>{screen}</p>
-    //         <p>{data}</p>
-    //         <button onClick={getData}>Get Data</button>
-    //         <button onClick={createArticle}>Create Article</button>
-    //         <button onClick={deleteCookie}>Log out</button>
-    //       </div>            
-    //     : <CreateArticle screen={screen} setScreen={setScreen} />
-    //   }
-    // </divdiv>
   );
 }
 

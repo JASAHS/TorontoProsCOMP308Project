@@ -21,6 +21,8 @@ import ShowUser from './components/ShowUser';
 
 import Home from './components/Home';
 import Login from './components/Login';
+
+import Motivation from './components/Motivation';
 //
 function App() {
 
@@ -45,6 +47,7 @@ function App() {
         <Route render={() => < EditUser />} path="/edit/:id" />
         <Route render={() => < CreateUser />} path="/create" />
         <Route render={() => < ShowUser />} path="/show/:id" />
+        <Route render={() => < Motivation />} path="/motivation" />
         {/* <Route render ={()=> < ShowArticle />} path="/showarticle/:id" />
           <Route render ={()=> < EditArticle />} path="/editarticle/:id" /> */}
 
