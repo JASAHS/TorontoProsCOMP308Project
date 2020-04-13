@@ -6,6 +6,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import List from './List';
+import PatientsList from './PatientsList';
 import { Link, withRouter, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -15,7 +16,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 //
 function View(props) {
   // read the info from props, coming from the ancestor component
-  const { screen, setScreen } = props;
+  // var screen1 = props.screen;
+  // var setScreen1 = props.setScreen;
+  const { screen, setScreen, type, setUsertype } = props;
+  // const { type, setUsertype } = props;
+  // const type1 = props.type;
+  // const setType1 = props.setUsertype;
+
+  console.log(type + "bro2");
   // return a stateful value and funcion to update it
   const [data, setData] = useState();
   //
@@ -52,13 +60,23 @@ function View(props) {
   //
   return (
     <div>
-      {status == false
+      {
+        type == "nurse" ? <div>
+          <Button variant="primary" type="submit" onClick={changeView}>
+            Show Patients List
+</Button><br /><br /><br />
+        </div> : <PatientsList />
+      }
+      {/* {status == false
         ? <div>
           <Button variant="primary" type="submit" onClick={changeView}>
             Show Patients List
-  </Button></div> : <List />}
+  </Button><br /><br /><br />
+        </div> : <List />} */}
 
-
+      <Button variant="primary" type="submit" onClick={deleteCookie}>
+        Log Out
+  </Button>
     </div>
     // <div className="App">
     //   {article !== 'y'

@@ -11,6 +11,7 @@ function App() {
   //state variable for the screen, admin or user
   const [screen, setScreen] = useState('auth');
   //store input field data, user name and password
+  const [usertype, setUsertype] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const apiUrl = "http://localhost:3000/signin";
@@ -24,19 +25,22 @@ function App() {
       const loginData = { auth: { username, password } }
       //call api
       const res = await axios.post(apiUrl, loginData);
-      console.log(res.data.auth)
+
+      // console.log(res.data.auth)
       console.log(res.data.screen)
+      console.log(res.data.type)
       //process the response
       if (res.data.screen !== undefined) {
+        setUsertype(res.data.type);
         setScreen(res.data.screen);
         console.log(res.data.screen);
       }
     } catch (e) { //print the error
       console.log(e);
     }
-  
+
   };
-  
+
   //check if the user already logged-in
   const readCookie = async () => {
     try {
@@ -62,19 +66,19 @@ function App() {
   //
   return (
     <div className="App">
-      {screen === 'auth' 
+      {screen === 'auth'
         ? <div>
           <label>Username: </label>
-          <br/>
+          <br />
           <input type="text" onChange={e => setUsername(e.target.value)} />
-          <br/>
+          <br />
           <label>Password: </label>
-          <br/>
+          <br />
           <input type="password" onChange={e => setPassword(e.target.value)} />
-          <br/>
+          <br />
           <button onClick={auth}>Login</button>
         </div>
-        : <View screen={screen} setScreen={setScreen} />
+        : <View screen={screen} setScreen={setScreen} type={usertype} setUsertype={setUsertype} />
       }
     </div>
   );
