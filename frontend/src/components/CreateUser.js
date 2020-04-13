@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import axios from 'axios';
 import Spinner from 'react-bootstrap/Spinner';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import { withRouter } from 'react-router-dom';
+
+import { Link, withRouter, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
+
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function CreateUser(props) {
   const [user, setUser] = useState({
     _id: '', firstName: '', lastName: '',
-    email: '', username: '', password: '', type: ''
+    email: '', username: '', password: '', type: '',
   });
   const [showLoading, setShowLoading] = useState(false);
   const apiUrl = "http://localhost:3000/";
@@ -17,6 +21,7 @@ function CreateUser(props) {
   const saveUser = (e) => {
     setShowLoading(true);
     e.preventDefault();
+    console.log(user.type);
     const data = {
       firstName: user.firstName, lastName: user.lastName,
       email: user.email, type: user.type, username: user.username, password: user.password
@@ -53,17 +58,18 @@ function CreateUser(props) {
           <Form.Group>
             <Form.Label> User Type</Form.Label>
             <select
-              required
               type="text"
+              name="type"
+              id="type"
               className="form-control"
               onChange={onChange}
               value={user.type}
               placeholder="Enter your UserType"
-              id="type"
+
             >
               <option value="">Select User Type</option>
-              <option value="teacher">Nurse</option>
-              <option value="guardian">Patient</option>
+              <option value="nurse">Nurse</option>
+              <option value="patient">Patient</option>
             </select>
           </Form.Group>
           <Form.Group>
