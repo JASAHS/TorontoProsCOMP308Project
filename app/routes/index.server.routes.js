@@ -3,12 +3,14 @@ var users = require('../../app/controllers/users.server.controller');
 var express = require('express');
 var router = express.Router();
 //Load the 'index' controller
-var index = require('../controllers/index.server.controller');
 //
 //handle routing for get and post request
 module.exports = function (app) {
     //handle a get request made to root path
-    app.get('/', index.render); //go to http://localhost:3000/
+    app.get('/', function (req, res) {
+
+        res.render('index');
+    });
 
 
     app.get("/users", users.list);

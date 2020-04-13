@@ -4,8 +4,7 @@
   "description": "Backend of COMP 308 TorontoPros Project",
   "main": "server.js",
   "author": {
-    "name": "torontopros",
-    "email": ""
+    "name": "torontopros"
   },
   "dependencies": {
     "bcrypt": "^4.0.0",
