@@ -25,6 +25,7 @@ import Login from './components/Login';
 import Motivation from './components/Motivation';
 import NurseShowPatient from './components/NurseShowPatient';
 import EnterSigns from './components/EnterSigns';
+import ShowSigns from './components/ShowSigns';
 //
 function App() {
 
@@ -52,8 +53,9 @@ function App() {
         <Route render={() => < Motivation />} path="/motivation" />
         <Route render={() => < NurseShowPatient />} path="/showPatient/:id" />
         <Route render={() => < EnterSigns />} path="/enterSigns/:id" />
+        <Route render={() => < ShowSigns />} path="/showSigns/:id" />
       </div>
-
+     
     </Router>
 
 

@@ -6,13 +6,28 @@ import { withRouter } from 'react-router-dom';
 
 function List(props) {
     const [data, setData] = useState([]);
+    const [patientdata, setpatientData] = useState([]);
     const [showLoading, setShowLoading] = useState(true);
     const apiUrl = "http://localhost:3000/users";
-
+    const pdata=[];
     useEffect(() => {
         const fetchData = async () => {
             const result = await axios(apiUrl);
             setData(result.data);
+            // if(result.data.type !== "nurse"){
+
+            // }
+            result.data.map((item) => {
+                if(item.type !== "nurse")
+                {
+                    console.log("reached mapping ")
+                    // setpatientData(item)
+                    pdata.push(item)
+                }
+              })
+              setpatientData(pdata);
+            
+
             setShowLoading(false);
         };
 
@@ -32,9 +47,7 @@ function List(props) {
             </Spinner>}
             <ListGroup>
                 {data.map((item, idx) => (
-                    <div>
-                        {item.type == "patient" &&
-                            <ListGroup.Item key={idx} action onClick={() => { showDetail(item._id) }}>{item.username}</ListGroup.Item>}</div>
+                <ListGroup.Item key={idx} action onClick={() => { showDetail(item._id) }}>{item.username}</ListGroup.Item>
                 ))}
             </ListGroup>
         </div>

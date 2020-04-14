@@ -9,27 +9,30 @@ import { Link, withRouter, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import { sign } from 'jsonwebtoken';
 
 function CreateSigns(props) {
+    const user_ids = props.match.params.id;
     const [signs, setSigns] = useState({
         _id: '', bodyTemp: '', heartRate: '',
-        bloodPressure: '', respiratoryRate: ''
+        bloodPressure: '', respiratoryRate: '',user_id:user_ids
     });
     const [showLoading, setShowLoading] = useState(false);
-    const apiUrl = "http://localhost:3000/";
+    const apiUrl = "http://localhost:3000/signs" ;
 
     const saveSigns = (e) => {
         setShowLoading(true);
         e.preventDefault();
-        console.log(signs.type);
+        console.log("reached save signs");
         const data = {
             bodyTemp: signs.bodyTemp, heartRate: signs.heartRate,
-            bloodPressure: signs.bloodPressure, respiratoryRate: signs.respiratoryRate
+            bloodPressure: signs.bloodPressure, respiratoryRate: signs.respiratoryRate,
+            user_id:signs.user_id
         };
         axios.post(apiUrl, data)
             .then((result) => {
                 setShowLoading(false);
-                props.history.push('/show/' + result.data._id)
+                props.history.push('/showSigns/' + result.data._id)
             }).catch((error) => setShowLoading(false));
     };
 
@@ -49,19 +52,19 @@ function CreateSigns(props) {
                 <Form onSubmit={saveSigns}>
                     <Form.Group>
                         <Form.Label> Enter the Body Temperature</Form.Label>
-                        <Form.Control type="text" name="bodyTemp" id="bodyTemp" placeholder="Enter the Body Tempearture" value={signs.bodyTemp} onChange={onChange} />
+                        <Form.Control type="number" name="bodyTemp" id="bodyTemp" placeholder="Enter the Body Tempearture" value={signs.bodyTemp} onChange={onChange} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label> Enter the Heart Rate</Form.Label>
-                        <Form.Control type="text" name="heartRate" id="heartRate" placeholder="Enter the Heart Rate" value={signs.heartRate} onChange={onChange} />
+                        <Form.Control type="number" name="heartRate" id="heartRate" placeholder="Enter the Heart Rate" value={signs.heartRate} onChange={onChange} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Enter the Blood Pressure</Form.Label>
-                        <Form.Control type="text" name="bloodPressure" id="bloodPressure" rows="3" placeholder="Enter the Blood Pressure" value={signs.bloodPressure} onChange={onChange} />
+                        <Form.Control type="number" name="bloodPressure" id="bloodPressure" rows="3" placeholder="Enter the Blood Pressure" value={signs.bloodPressure} onChange={onChange} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Enter the Respiratory Rate</Form.Label>
-                        <Form.Control type="text" name="respiratory" id="respiratory" placeholder="Enter the Respiratory Rate" value={signs.respiratoryRate} onChange={onChange} />
+                        <Form.Control type="number" name="respiratoryRate" id="respiratoryRate" placeholder="Enter the Respiratory Rate" value={signs.respiratoryRate} onChange={onChange} />
                     </Form.Group>
                     <Button variant="primary" type="submit">
                         Save

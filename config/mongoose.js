@@ -15,8 +15,8 @@ module.exports = function () {
 
   // Load the 'User' model 
   require('../app/models/user.server.model');
-  // // Load the 'Article' model 
-
+  // Load the 'Signs' model 
+  require('../app/models/signs.server.model');
   // Return the Mongoose connection instance
   return db;
 };
