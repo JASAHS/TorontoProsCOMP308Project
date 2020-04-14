@@ -23,6 +23,8 @@ import Home from './components/Home';
 import Login from './components/Login';
 
 import Motivation from './components/Motivation';
+import NurseShowPatient from './components/NurseShowPatient';
+import EnterSigns from './components/EnterSigns';
 //
 function App() {
 
@@ -48,9 +50,8 @@ function App() {
         <Route render={() => < CreateUser />} path="/create" />
         <Route render={() => < ShowUser />} path="/show/:id" />
         <Route render={() => < Motivation />} path="/motivation" />
-        {/* <Route render ={()=> < ShowArticle />} path="/showarticle/:id" />
-          <Route render ={()=> < EditArticle />} path="/editarticle/:id" /> */}
-
+        <Route render={() => < NurseShowPatient />} path="/showPatient/:id" />
+        <Route render={() => < EnterSigns />} path="/enterSigns/:id" />
       </div>
 
     </Router>

@@ -21,7 +21,7 @@ function List(props) {
 
     const showDetail = (id) => {
         props.history.push({
-            pathname: '/show/' + id
+            pathname: '/showPatient/' + id
         });
     }
 
