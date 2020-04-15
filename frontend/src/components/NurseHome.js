@@ -56,9 +56,7 @@ function Nursehome(props) {
                 </Button><br /><br /><br /></div> : < PatientsList />}
             <a href="/motivation" ><Button variant="primary" >Send Motivation Tips</Button></a><br /><br /><br />
 
-            <Button variant="primary" type="submit" onClick={deleteCookie}>
-                Log Out
-            </Button>
+            
         </div>
     );
 }

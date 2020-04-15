@@ -26,6 +26,7 @@ function View(props) {
   //
   return (
     <div>
+ 
       {
         type == "nurse" &&
         <div>< NurseHome /></div>
@@ -34,10 +35,10 @@ function View(props) {
         type == "patient" &&
         <div><List /></div>
       }
-
-      <Button variant="primary" type="submit" onClick={deleteCookie}>
+ <Button variant="primary" type="submit" onClick={deleteCookie}>
         Log Out
   </Button>
+      
     </div>
   );
 }
