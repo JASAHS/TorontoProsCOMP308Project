@@ -1,3 +1,4 @@
+//model for vital signs creation
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const SignsSchema = new Schema({

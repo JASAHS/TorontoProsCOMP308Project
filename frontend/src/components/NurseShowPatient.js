@@ -27,16 +27,20 @@ function ShowUser(props) {
         fetchData();
     }, []);
 
-    const deleteSigns = (id) => {
+    const deleteSigns = async (id) => {
         setShowLoading(true);
-        // const user = { firstName: data.firstName, lastName: data.lastName, 
-        //   email: data.email,username: data.username, password: data.password };
-        const delSign={ids:id}
-        axios.delete(apiUrl3, delSign)
+
+        const mainUrl=apiUrl3 + id;
+        axios.delete(mainUrl)
           .then((result) => {
             setShowLoading(false);
-            console.log(result.data)
+            // props.history.push({
+            //     pathname: '/showPatient/' + props.match.params.id
+            // });
+            
           }).catch((error) => setShowLoading(false));
+          const result2=await axios(apiUrl2);
+            setSign(result2.data);
       };
 
     const enterSigns = (id) => {
@@ -60,7 +64,7 @@ function ShowUser(props) {
                 <ListGroup>
                 {sign.map((item, idx) => (
                 <ListGroup.Item key={idx} >Body Temperature: {item.bodyTemp}    Heart Rate:  {item.heartRate}      Blood Pressure:   {item.bloodPressure}        Respiratory Rate:{item.respiratoryRate} 
-                <Button type="button" variant="danger" onClick={() => { deleteSigns(item._id) }}>Delete</Button></ListGroup.Item>
+                &nbsp;&nbsp;&nbsp;<Button type="button" variant="danger" onClick={() => { deleteSigns(item._id) }}>Delete</Button></ListGroup.Item>
                 ))}
                 </ListGroup>
     <p></p>

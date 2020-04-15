@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
-// const Signs = mongoose.model('Signs');
 const Signs = require('mongoose').model('Signs');
 const User = require('mongoose').model('User');
 
-//
+//function for displaying
 function getErrorMessage(err) {
     if (err.errors) {
         for (let errName in err.errors) {
@@ -14,7 +13,7 @@ function getErrorMessage(err) {
         return 'Unknown server error';
     }
 };
-//
+//creation of the vital signs for user
 exports.create = function (req, res) {
     const signs = new Signs();
     console.log("reached post of signs creeate")
@@ -53,32 +52,8 @@ exports.create = function (req, res) {
     
     });
 };
-//
-exports.list = function (req, res) {
-    Article.find().sort('-created').populate('creator', 'firstName lastName fullName').exec((err, articles) => {
-if (err) {
-        return res.status(400).send({
-            message: getErrorMessage(err)
-        });
-    } else {
-        res.status(200).json(articles);
-    }
-});
-};
 
-exports.lists = function (req, res, next) {
-    // Use the 'User' instance's 'find' method to retrieve a new user document
-    console.log("entered the list");
-	Signs.find({creator:req.params.id}, function (err, signs) {
-		if (err) {
-			return next(err);
-		} else {
-            console.log(signs + "sdd")
-            res.status(200).json(signs);
-            
-		}
-	});
-};
+//
 exports.findWithUser = function(req, res) {
     console.log(req.params.userIds);
     Signs.find({ creator:req.params.userIds})
@@ -86,35 +61,13 @@ exports.findWithUser = function(req, res) {
       .catch(err => res.status(400).json(err));
       
   };
-//
-// 'userByID' controller method to find a user by its id
 
-// exports.signsByID = function (req, res, next, id) {
-//     console.log("reached params signbyid")
-//     Signs.findOne({_id : id}, (err, signs) => {
-
-//         if (err) { return getErrorMessage(err); }
-//         //
-//         req.signs = signs;
-//         console.log('user._id',req.id);
-
-	
-//     })
-//     // Signs.findById(id).exec((err, signs) => {if (err) return next(err);
-//     // if (!signs) return next(new Error('Failed to load signs '
-//     //         + id));
-//     //     req.signs = signs;
-//     //     console.log('in signsById:', req.signs)
-//     //     next();
-//     // });
-// };
-//
+//reading of the vital signs
 exports.read = function (req, res) {
-    console.log("reached read")
-    // res.status(200).json(req.signs);
     res.status(200).json(req.signs);
 };
 
+//retreival of the vital signs by param
 exports.signsByID = function (req, res, next, id) {
     console.log("recahed signsByID");
 	// Use the 'User' static 'findOne' method to retrieve a specific user
@@ -134,53 +87,19 @@ exports.signsByID = function (req, res, next, id) {
 		}
 	});
 };
-//
-exports.update = function (req, res) {
-    console.log('in update:', req.article)
-    const article = req.article;
-    article.title = req.body.title;
-    article.content = req.body.content;
-    article.save((err) => {
-        if (err) {
-            return res.status(400).send({
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.status(200).json(article);
-        }
-    });
-};
-//
-exports.delete = function (req, res) {
-    const article = req.article;
-    article.remove((err) => {
-        if (err) {
-            return res.status(400).send({
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.status(200).json(article);
-        }
-    });
-};
 
+//
+exports.delete = function (req, res, next) {
+    Signs.findByIdAndRemove(req.user.id, req.body, function (err, user) {
+	if (err) return next(err);
+		res.json(user);
+	});
+};
 exports.destroy = function(req, res) {
-    Signs.findByIdAndDelete(req.body.ids)
+    Signs.findByIdAndDelete(req.params.id)
       .then(() => res.json("sign deleted"))
       .catch(err => res.status(400).json("Error => " + err));
   };
-//The hasAuthorization() middleware uses the req.article and req.user objects
-//to verify that the current user is the creator of the current article
-exports.hasAuthorization = function (req, res, next) {
-    console.log('in hasAuthorization: ',req.article.creator)
-    console.log('in hasAuthorization: ',req.user._id)
 
-    if (req.article.creator.id !== req.user._id) {
-        return res.status(403).send({
-            message: 'User is not authorized'
-        });
-    }
-    next();
-};
 
 
