@@ -33,6 +33,8 @@ module.exports = function (app) {
     app.post('/signs',signs.create);
     // app.get('/signs/:signId',signs.read);
     app.get('/signs/:signId',signs.read);
+    app.get('/signses/:userIds',signs.findWithUser);
+    app.delete('/signsess',signs.destroy)
     // app.get('/signs/:signId',signs.signsByID);
     app.param('signId', signs.signsByID);
 

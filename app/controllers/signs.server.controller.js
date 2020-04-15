@@ -65,6 +65,27 @@ if (err) {
     }
 });
 };
+
+exports.lists = function (req, res, next) {
+    // Use the 'User' instance's 'find' method to retrieve a new user document
+    console.log("entered the list");
+	Signs.find({creator:req.params.id}, function (err, signs) {
+		if (err) {
+			return next(err);
+		} else {
+            console.log(signs + "sdd")
+            res.status(200).json(signs);
+            
+		}
+	});
+};
+exports.findWithUser = function(req, res) {
+    console.log(req.params.userIds);
+    Signs.find({ creator:req.params.userIds})
+      .then(signs => res.json(signs))
+      .catch(err => res.status(400).json(err));
+      
+  };
 //
 // 'userByID' controller method to find a user by its id
 
@@ -95,7 +116,7 @@ exports.read = function (req, res) {
 };
 
 exports.signsByID = function (req, res, next, id) {
-    console.log("recahed singyiddsdsd");
+    console.log("recahed signsByID");
 	// Use the 'User' static 'findOne' method to retrieve a specific user
 	Signs.findOne({
 		_id: id
@@ -142,6 +163,12 @@ exports.delete = function (req, res) {
         }
     });
 };
+
+exports.destroy = function(req, res) {
+    Signs.findByIdAndDelete(req.body.ids)
+      .then(() => res.json("sign deleted"))
+      .catch(err => res.status(400).json("Error => " + err));
+  };
 //The hasAuthorization() middleware uses the req.article and req.user objects
 //to verify that the current user is the creator of the current article
 exports.hasAuthorization = function (req, res, next) {

@@ -4,22 +4,40 @@ import Spinner from 'react-bootstrap/Spinner';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Button from 'react-bootstrap/Button';
 import { withRouter } from 'react-router-dom';
-
+import ListGroup from 'react-bootstrap/ListGroup';
 function ShowUser(props) {
     const [data, setData] = useState({});
+    const [sign,setSign]=useState([]);
     const [showLoading, setShowLoading] = useState(true);
     const apiUrl = "http://localhost:3000/users/" + props.match.params.id;
-
+    const apiUrl2 = "http://localhost:3000/signses/" + props.match.params.id;
+    const apiUrl3 = "http://localhost:3000/signsess";
     useEffect(() => {
         setShowLoading(false);
         const fetchData = async () => {
             const result = await axios(apiUrl);
             setData(result.data);
-            setShowLoading(false);
+            console.log(result.data);
+            const result2=await axios(apiUrl2);
+            setSign(result2.data);
+            console.log(result2)
+            // setShowLoading(false);
         };
 
         fetchData();
     }, []);
+
+    const deleteSigns = (id) => {
+        setShowLoading(true);
+        // const user = { firstName: data.firstName, lastName: data.lastName, 
+        //   email: data.email,username: data.username, password: data.password };
+        const delSign={ids:id}
+        axios.delete(apiUrl3, delSign)
+          .then((result) => {
+            setShowLoading(false);
+            console.log(result.data)
+          }).catch((error) => setShowLoading(false));
+      };
 
     const enterSigns = (id) => {
         props.history.push({
@@ -39,6 +57,13 @@ function ShowUser(props) {
                     <Button type="button" variant="primary" onClick={() => { enterSigns(data._id) }}>Enter Vital Signs</Button>&nbsp;
 
                 </p>
+                <ListGroup>
+                {sign.map((item, idx) => (
+                <ListGroup.Item key={idx} >Body Temperature: {item.bodyTemp}    Heart Rate:  {item.heartRate}      Blood Pressure:   {item.bloodPressure}        Respiratory Rate:{item.respiratoryRate} 
+                <Button type="button" variant="danger" onClick={() => { deleteSigns(item._id) }}>Delete</Button></ListGroup.Item>
+                ))}
+                </ListGroup>
+    <p></p>
             </Jumbotron>
         </div>
     );
