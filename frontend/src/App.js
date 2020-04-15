@@ -24,7 +24,7 @@ import Login from './components/Login';
 
 import Motivation from './components/Motivation';
 import NurseShowPatient from './components/NurseShowPatient';
-import EnterSigns from './components/EnterSigns';
+import CreateVitalSigns from './components/CreateVitalSigns';
 import ShowSigns from './components/ShowSigns';
 //
 function App() {
@@ -37,7 +37,7 @@ function App() {
           <Nav className="mr-auto">
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/login">Login</Nav.Link>
-            <Nav.Link href="/list">List of Users</Nav.Link>
+            {/* <Nav.Link href="/list">List of Users</Nav.Link> */}
             <Nav.Link href="/create">Sign Up</Nav.Link>
           </Nav>
         </Navbar.Collapse>
@@ -52,7 +52,7 @@ function App() {
         <Route render={() => < ShowUser />} path="/show/:id" />
         <Route render={() => < Motivation />} path="/motivation" />
         <Route render={() => < NurseShowPatient />} path="/showPatient/:id" />
-        <Route render={() => < EnterSigns />} path="/enterSigns/:id" />
+        <Route render={() => < CreateVitalSigns />} path="/enterSigns/:id" />
         <Route render={() => < ShowSigns />} path="/showSigns/:id" />
       </div>
      

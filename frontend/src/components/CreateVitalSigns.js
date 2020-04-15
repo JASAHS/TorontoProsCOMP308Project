@@ -10,7 +10,7 @@ import PropTypes from "prop-types";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import { sign } from 'jsonwebtoken';
-
+//function to create the vital signs
 function CreateSigns(props) {
     const user_ids = props.match.params.id;
     const [signs, setSigns] = useState({

@@ -21,7 +21,7 @@ function ShowUser(props) {
             const result2=await axios(apiUrl2);
             setSign(result2.data);
             console.log(result2)
-            // setShowLoading(false);
+           
         };
 
         fetchData();
@@ -34,13 +34,10 @@ function ShowUser(props) {
         axios.delete(mainUrl)
           .then((result) => {
             setShowLoading(false);
-            // props.history.push({
-            //     pathname: '/showPatient/' + props.match.params.id
-            // });
             
           }).catch((error) => setShowLoading(false));
           const result2=await axios(apiUrl2);
-            setSign(result2.data);
+        setSign(result2.data);
       };
 
     const enterSigns = (id) => {

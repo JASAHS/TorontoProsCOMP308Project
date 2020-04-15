@@ -4,9 +4,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Spinner from 'react-bootstrap/Spinner';
 import { withRouter } from 'react-router-dom';
 
+//function to filter the patient and nurse
 function List(props) {
     const [data, setData] = useState([]);
-    const [patientdata, setpatientData] = useState([]);
     const [showLoading, setShowLoading] = useState(true);
     const apiUrl = "http://localhost:3000/users";
     const pdata=[];
@@ -14,20 +14,6 @@ function List(props) {
         const fetchData = async () => {
             const result = await axios(apiUrl);
             setData(result.data);
-            // if(result.data.type !== "nurse"){
-
-            // }
-            result.data.map((item) => {
-                if(item.type !== "nurse")
-                {
-                    console.log("reached mapping ")
-                    // setpatientData(item)
-                    pdata.push(item)
-                }
-              })
-              setpatientData(pdata);
-            
-
             setShowLoading(false);
         };
 

@@ -9,7 +9,7 @@ import { Link, withRouter, useLocation } from "react-router-dom";
 import PropTypes from "prop-types";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-
+//function to create the user
 function CreateUser(props) {
   const [user, setUser] = useState({
     _id: '', firstName: '', lastName: '',

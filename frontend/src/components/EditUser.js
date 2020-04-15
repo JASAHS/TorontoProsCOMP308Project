@@ -5,7 +5,7 @@ import Jumbotron from 'react-bootstrap/Jumbotron';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { withRouter } from 'react-router-dom';
-
+//function to edit a user
 function EditUser(props) {
   const [user, setUser] = useState({ _id: '', firstName: '', lastName: '', 
   email: '',username: '',password: '' });  

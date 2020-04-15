@@ -33,11 +33,6 @@ function ShowUser(props) {
         <p>Heart Rate: {data.heartRate}</p>
         <p>Blood Pressure: {data.bloodPressure}</p>
         <p>Respiratory Rate: {data.respiratoryRate}</p>
- 
-        {/* <p>
-          <Button type="button" variant="primary" onClick={() => { editUser(data._id) }}>Edit</Button>&nbsp;
-          <Button type="button" variant="danger" onClick={() => { deleteUser(data._id) }}>Delete</Button>
-        </p> */}
       </Jumbotron>
     </div>
   );

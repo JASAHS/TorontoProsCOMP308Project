@@ -88,13 +88,7 @@ exports.signsByID = function (req, res, next, id) {
 	});
 };
 
-//
-exports.delete = function (req, res, next) {
-    Signs.findByIdAndRemove(req.user.id, req.body, function (err, user) {
-	if (err) return next(err);
-		res.json(user);
-	});
-};
+//delete the vital signs
 exports.destroy = function(req, res) {
     Signs.findByIdAndDelete(req.params.id)
       .then(() => res.json("sign deleted"))

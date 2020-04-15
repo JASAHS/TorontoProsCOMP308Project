@@ -4,6 +4,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Spinner from 'react-bootstrap/Spinner';
 import { withRouter } from 'react-router-dom';
 
+//List to display the users
 function List(props) {
   const [data, setData] = useState([]);
   const [showLoading, setShowLoading] = useState(true);
