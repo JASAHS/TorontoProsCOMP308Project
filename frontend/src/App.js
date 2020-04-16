@@ -23,9 +23,11 @@ import Home from './components/Home';
 import Login from './components/Login';
 
 import Motivation from './components/Motivation';
+import ShowMotivation from './components/ShowMotivation';
 import NurseShowPatient from './components/NurseShowPatient';
 import CreateVitalSigns from './components/CreateVitalSigns';
 import ShowSigns from './components/ShowSigns';
+import NurseHome from './components/NurseHome';
 //
 function App() {
 
@@ -51,9 +53,11 @@ function App() {
         <Route render={() => < CreateUser />} path="/create" />
         <Route render={() => < ShowUser />} path="/show/:id" />
         <Route render={() => < Motivation />} path="/motivation" />
+        <Route render={() => < ShowMotivation />} path="/showMotivation" />
         <Route render={() => < NurseShowPatient />} path="/showPatient/:id" />
         <Route render={() => < CreateVitalSigns />} path="/enterSigns/:id" />
         <Route render={() => < ShowSigns />} path="/showSigns/:id" />
+        <Route render={() => < NurseHome />} path="/nurseHome" />
       </div>
      
     </Router>

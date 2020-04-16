@@ -11,18 +11,11 @@ import PropTypes from "prop-types";
 import Home from './Home';
 import Motivation from './Motivation';
 import "bootstrap/dist/css/bootstrap.min.css";
-import CreateUser from './CreateUser';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect
-} from "react-router-dom";
+
 //
 
 //function to display the home of the nurse
-function Nursehome(props) {
+function NurseHome(props) {
     // read the info from props, coming from the ancestor component
     const { screen, setScreen, type, setUsertype } = props;
     
@@ -54,12 +47,10 @@ function Nursehome(props) {
                 <Button variant="primary" type="submit" onClick={changeView}>
                     Show Patients List
                 </Button><br /><br /><br /></div> : < PatientsList />}
-            <a href="/motivation" ><Button variant="primary" >Send Motivation Tips</Button></a><br /><br /><br />
-
-            
+            <a href="/motivation" ><Button variant="primary" >Send Motivation Tips</Button></a><br /><br /><br />    
         </div>
     );
 }
 
 //
-export default Nursehome;
+export default NurseHome;

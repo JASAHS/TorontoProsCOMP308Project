@@ -5,34 +5,57 @@ import Spinner from 'react-bootstrap/Spinner';
 import Jumbotron from 'react-bootstrap/Jumbotron';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import List from './List';
-import PatientsList from './PatientsList';
 import { withRouter, useLocation } from "react-router-dom";
-import PropTypes from "prop-types";
-import Home from './Home';
 import "bootstrap/dist/css/bootstrap.min.css";
-import CreateUser from './CreateUser';
-import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect
-} from "react-router-dom";
 //
 
 //
-function View(props) {
+function Motivation(props) {
+  const [tip, setTip] = useState({
+    _id: '', tip: '',
+  });
+  const [showLoading, setShowLoading] = useState(false);
+  const apiUrl = "http://localhost:3000/createTips";
 
+  const saveTip = (e) => {
+    setShowLoading(true);
+    e.preventDefault();
+    const data = {
+      tip: tip.tip
+    };
+    axios.post(apiUrl, data)
+      .then((result) => {
+        setShowLoading(false);
+        props.history.push('/show/' + result.data._id)
+      }).catch((error) => setShowLoading(false));
+  };
 
+  const onChange = (e) => {
+    e.persist();
+    setTip({ ...tip, [e.target.name]: e.target.value });
+  }
 
-    //
-    return (
-        <div><h3>what up bro what up</h3>
-          
-        </div>
-    );
+  return (
+    <div>
+      {showLoading &&
+        <Spinner animation="border" role="status">
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      }
+      <Jumbotron>
+        <Form onSubmit={saveTip}>
+          <Form.Group>
+            <Form.Label>Tip</Form.Label>
+            <Form.Control type="text" name="tip" id="tip" placeholder="Enter a motivational tip" value={tip.tip} onChange={onChange} />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Save
+          </Button>
+        </Form>
+      </Jumbotron>
+    </div>
+  );
 }
 
 //
-export default View;
+export default withRouter(Motivation);

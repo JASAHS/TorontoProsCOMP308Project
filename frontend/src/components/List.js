@@ -3,6 +3,7 @@ import axios from 'axios';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Spinner from 'react-bootstrap/Spinner';
 import { withRouter } from 'react-router-dom';
+import Button from 'react-bootstrap/Button';
 
 //List to display the users
 function List(props) {
@@ -13,6 +14,7 @@ function List(props) {
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(apiUrl);
+      console.log(result.data);
       setData(result.data);
       setShowLoading(false);
     };
@@ -36,6 +38,7 @@ function List(props) {
           <ListGroup.Item key={idx} action onClick={() => { showDetail(item._id) }}>{item.username}</ListGroup.Item>
         ))}
       </ListGroup>
+      <a href="/showmotivation" ><Button variant="primary" >Show Motivational Tips</Button></a><br /><br /><br />
     </div>
   );
 }

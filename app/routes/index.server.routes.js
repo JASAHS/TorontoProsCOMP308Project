@@ -1,6 +1,7 @@
 ﻿
 var users = require('../../app/controllers/users.server.controller');
-var signs=require('../../app/controllers/signs.server.controller');
+var signs = require('../../app/controllers/signs.server.controller');
+var tips = require('../../app/controllers/tips.server.controller');
 var express = require('express');
 var router = express.Router();
 
@@ -23,6 +24,8 @@ module.exports = function (app) {
     app.post('/signin', users.authenticate);
     app.get('/signout', users.signout);
     app.get('/read_cookie', users.isSignedIn);
+    app.get('/showTips', tips.list);
+    app.post('/createTips', tips.create);
 
     //vital signs entering
     app.post('/signs',signs.create); //entering vital signs
